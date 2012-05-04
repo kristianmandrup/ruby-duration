@@ -3,3 +3,5 @@
 * Added months (30 days) and years (365.25 days)
 * Added month and year I18n support
 * Added Rails engine in order to support auto-load of duration locale files
+* Added numeric macros
+* Added TimeUnit wrappers such as: Hours, Weeks etc.

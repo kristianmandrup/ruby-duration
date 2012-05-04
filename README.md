@@ -18,6 +18,25 @@ Features
   * Mongoid serialization support. Use `require 'duration/mongoid'`.
   * Tested on mri 1.8.7, ree 1.8.7, mri 1.9.2, jruby and rubinius. Kudos to rvm!
 
+Extras
+---------
+
+### Macros
+
+`require 'duration/macros'`
+
+```ruby
+1.day + 4.hours
+10.am
+```
+
+`require 'duration/time_units'`
+
+```ruby
+weeks = Weeks.new(6)
+years = Years.new(6)
+```
+
 
 Show me the code
 ----------------
