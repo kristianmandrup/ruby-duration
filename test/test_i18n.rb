@@ -1,7 +1,7 @@
 # -*- encoding:  utf-8 -*-
 require 'helper'
 
-I18n.load_path << File.join(File.dirname(__FILE__), 'fixtures', 'locales', 'pt.yml')
+I18n.load_path << Dir[File.join(File.dirname(__FILE__), 'fixtures', 'locales', '*.yml')]
 
 describe "I18n" do  
   describe "when the locale is pt" do
@@ -63,6 +63,20 @@ describe "I18n" do
 
     it "should translate to anos" do
       assert_equal "anos", Duration.new.format("%~y")
+    end
+  end
+
+  describe "when the locale is da" do
+    before do
+      I18n.locale = :da
+    end
+
+    it "should translate to måned" do
+      assert_equal "måned", Duration.new(:month => 1).format("%~o")
+    end
+
+    it "should translate to måneder" do
+      assert_equal "måneder", Duration.new.format("%~o")
     end
   end
 end
