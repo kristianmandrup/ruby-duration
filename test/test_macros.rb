@@ -3,16 +3,52 @@ require 'helper'
 require 'duration/macros'
 
 describe 'Numeric duration macros' do
-  it "seconds" do
+  it "duration" do
+    d = (60 + 30).duration
+    assert_equal 30, d.seconds
+    assert_equal 90, d.total
+  end
+
+  it "dseconds" do
     d = 3.dseconds
     assert_equal 3, d.seconds
     assert_equal 3, d.total
   end
 
-  it "minutes" do
+  it "dminutes" do
     d = 3.dminutes
     assert_equal 3, d.minutes
     assert_equal 3 * 60, d.total
+  end
+
+  it "dhours" do
+    d = 3.dhours
+    assert_equal 3, d.hours
+    assert_equal 3 * 3600, d.total
+  end
+
+  it "ddays" do
+    d = 3.ddays
+    assert_equal 3, d.days
+    assert_equal 3 * 24 * 3600, d.total
+  end
+
+  it "dweeks" do
+    d = 3.dweeks
+    assert_equal 3, d.weeks
+    assert_equal 3 * 7 * 24 * 3600, d.total
+  end
+
+  it "dmonths" do
+    d = 3.dmonths
+    assert_equal 3, d.months
+    assert_equal 3 * 30 * 24 * 3600, d.total
+  end
+
+  it "dyears" do
+    d = 3.dyears
+    assert_equal 3, d.years
+    assert_equal 3 * 365.25 * 24 * 3600, d.total
   end
 end
 
