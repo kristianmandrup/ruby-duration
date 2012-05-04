@@ -4,13 +4,13 @@ require 'duration/macros'
 
 describe 'Numeric duration macros' do
   it "seconds" do
-    d = 3.seconds
+    d = 3.dseconds
     assert_equal 3, d.seconds
     assert_equal 3, d.total
   end
 
   it "minutes" do
-    d = 3.minutes
+    d = 3.dminutes
     assert_equal 3, d.minutes
     assert_equal 3 * 60, d.total
   end
