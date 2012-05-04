@@ -2,7 +2,9 @@
 require 'i18n'
 require 'active_support/core_ext'
 
-require 'duration/rails/engine' if defined?(Rails) && Rails::VERSION::STRING.to >= '3.1'
+if defined?(Rails) && Rails::VERSION::STRING >= '3.1'
+  require 'duration/rails/engine' 
+end
 
 # Duration objects are simple mechanisms that allow you to operate on durations
 # of time.  They allow you to know how much time has passed since a certain
