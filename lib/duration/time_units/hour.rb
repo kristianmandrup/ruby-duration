@@ -1,10 +1,10 @@
-class Months < Duration
+class Hours < Duration
 	def initialize number = 1
-		super(:months => number)
+		super(:hours => number)
 	end
 end
 
-class Month < Months
+class Hour < Hours
 	def initialize
 		super(1)
 	end
