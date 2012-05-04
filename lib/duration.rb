@@ -11,20 +11,24 @@ require 'active_support/core_ext'
 class Duration
   include Comparable
 
-  UNITS = [:seconds, :minutes, :hours, :days, :weeks]
+  UNITS = [:seconds, :minutes, :hours, :days, :weeks, :months, :years]
 
   MULTIPLES = {:seconds => 1,
                :minutes => 60,
                :hours   => 3600,
                :days    => 86400,
                :weeks   => 604800,
+               :months  => 2592000, # 30 days
+               :years   => 31557600, # 365.25 days
                :second  => 1,
                :minute  => 60,
                :hour    => 3600,
                :day     => 86400,
-               :week    => 604800}
+               :week    => 604800,
+               :month   => 2592000,
+               :year    => 31557600}
 
-  attr_reader :weeks, :days, :hours, :minutes, :seconds, :total
+  attr_reader :years, :months, :weeks, :days, :hours, :minutes, :seconds, :total
 
   # Initialize a duration. 'args' can be a hash or anything else.  If a hash is
   # passed, it will be scanned for a key=>value pair of time units such as those
@@ -151,11 +155,16 @@ class Duration
   #
   def format(format_str)
     identifiers = {
+      'y'  => @years,
+      'o'  => @months,
       'w'  => @weeks,
       'd'  => @days,
       'h'  => @hours,
       'm'  => @minutes,
       's'  => @seconds,
+      'ty' => Proc.new { total_years },
+      'to' => Proc.new { total_months },
+      'tw' => Proc.new { total_weeks },
       'td' => Proc.new { total_days },
       'th' => Proc.new { total_hours },
       'tm' => Proc.new { total_minutes },
@@ -169,13 +178,18 @@ class Duration
       '~h' => i18n_for(:hour),
       '~d' => i18n_for(:day),
       '~w' => i18n_for(:week),
+      '~o' => i18n_for(:month),
+      '~y' => i18n_for(:year),
+      'tyr'=> Proc.new { "#{total_years} #{i18n_for(:total_year)}"},
+      'tmo'=> Proc.new { "#{total_months} #{i18n_for(:total_month)}"},
+      'twk'=> Proc.new { "#{total_weeks} #{i18n_for(:total_week)}"},
       'tdu'=> Proc.new { "#{total_days} #{i18n_for(:total_day)}"},
       'thu'=> Proc.new { "#{total_hours} #{i18n_for(:total_hour)}"},
       'tmu'=> Proc.new { "#{total_minutes} #{i18n_for(:total_minute)}"},
       'tsu'=> Proc.new { "#{total} #{i18n_for(:total)}"}
     }
 
-    format_str.gsub(/%?%(w|d|h|m|s|t([dhms]u?)?|H|M|S|~(?:s|m|h|d|w))/) do |match|
+    format_str.gsub(/%?%(y|o|w|d|h|m|s|t([ydhms]u?)?|H|M|S|~(?:s|m|h|d|w|o|y))/) do |match|
       match['%%'] ? match : (identifiers[match[1..-1]].class == Proc ? identifiers[match[1..-1]].call : identifiers[match[1..-1]])
     end.gsub('%%', '%')
   end
@@ -189,7 +203,7 @@ private
   # durations are in specific units.  This method is called internally, and
   # does not need to be called by user code.
   def calculate!
-    multiples = [MULTIPLES[:weeks], MULTIPLES[:days], MULTIPLES[:hours], MULTIPLES[:minutes], MULTIPLES[:seconds]]
+    multiples = [MULTIPLES[:years], MULTIPLES[:months], MULTIPLES[:weeks], MULTIPLES[:days], MULTIPLES[:hours], MULTIPLES[:minutes], MULTIPLES[:seconds]]
     units     = []
     @total    = @seconds.to_f.round
     multiples.inject(@total) do |total, multiple|
@@ -199,7 +213,7 @@ private
     end
 
     # Gather the divided units
-    @weeks, @days, @hours, @minutes, @seconds = units
+    @years, @months, @weeks, @days, @hours, @minutes, @seconds = units
   end
 
   def i18n_for(singular)

@@ -48,5 +48,21 @@ describe "I18n" do
     it "should translate to semanas" do
       assert_equal "semanas", Duration.new.format("%~w")
     end
+
+    it "should translate to mes" do
+      assert_equal "mes", Duration.new(:month => 1).format("%~o")
+    end
+
+    it "should translate to meses" do
+      assert_equal "meses", Duration.new.format("%~o")
+    end
+
+    it "should translate to ano" do
+      assert_equal "ano", Duration.new(:year => 1).format("%~y")
+    end
+
+    it "should translate to anos" do
+      assert_equal "anos", Duration.new.format("%~y")
+    end
   end
 end

@@ -10,3 +10,7 @@ pt:
     days: dias
     week: semana
     weeks: semanas
+    month: mes
+    months: meses
+    year: ano
+    years: anos
