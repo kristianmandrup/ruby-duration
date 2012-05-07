@@ -1,12 +1,10 @@
-ruby-duration
+xduration
 =============
 
 Duration is an immutable type that represents some amount of time with accuracy in seconds.
 
 A lot of the code and inspirations is borrowed from [duration](http://rubyforge.org/projects/duration) 
 lib, which is a **mutable** Duration type with lot more features but lack of tests.
-
-I'll try to contact the author of duration to make ruby-duration version 2 of duration's lib. ;)
 
 
 Features
@@ -56,7 +54,7 @@ Show me the code
     Duration.new(:weeks => 1, :days => 20).iso8601 => "P3W6DT0H0M0S"
 
 ### Mongoid support
-The current version of this gem supports Mongoid >= [2.1.0](https://github.com/mongoid/mongoid). For lower Mongoid versions try the tag [v1.0.0](https://github.com/peleteiro/ruby-duration/tree/v1.0.0)
+The current version of this gem supports Mongoid >= [2.1.0](https://github.com/mongoid/mongoid). 
 
     require 'duration/mongoid'
 

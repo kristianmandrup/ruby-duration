@@ -2,17 +2,16 @@
 require File.expand_path("../lib/duration/version", __FILE__)
 
 Gem::Specification.new do |s|
-  s.name        = "ruby-duration"
+  s.name        = "xduration"
   s.version     = Duration::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Jose Peleteiro", "Bruno Azisaka Maciel"]
-  s.email       = ["jose@peleteiro.net", "bruno@azisaka.com.br"]
-  s.homepage    = "http://github.com/peleteiro/ruby-duration"
+  s.authors     = ["Jose Peleteiro", "Bruno Azisaka Maciel", "Kristian Mandrup"]
+  s.email       = ["jose@peleteiro.net", "bruno@azisaka.com.br", "kmandrup@gmail.com"]
+  s.homepage    = "http://github.com/kristianmandrup/xduration"
   s.summary     = "Duration type"
   s.description = "Duration type"
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "ruby-duration"
 
   s.add_dependency "activesupport", ">= 3.0.0"
   s.add_dependency "i18n", ">= 0"
